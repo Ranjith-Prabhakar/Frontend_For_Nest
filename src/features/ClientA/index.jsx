@@ -21,11 +21,11 @@ export default function ClientA() {
 
   async function sendMessageToB() {
     try {
-      const response = await axios.post("http://localhost:3000/message-to-b", {
+      await axios.post("http://localhost:3000/message-to-b", {
         sender: "clientA",
         message,
       });
-      console.log(response);
+
       setMessage("");
     } catch (error) {
       console.log(error);
@@ -34,6 +34,7 @@ export default function ClientA() {
 
   return (
     <div>
+      <h1>Client-A</h1>
       <input
         type="text"
         value={message}
