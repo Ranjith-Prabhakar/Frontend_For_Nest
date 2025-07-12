@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
+import { CLIENT_A_SERVICE } from "../../../app/constants";
 
 export default function ClientA() {
   const [message, setMessage] = useState("");
   const [receivedMessages, setReceivedMessages] = useState([]);
 
   useEffect(() => {
-    const socket = io("http://localhost:3000", {
+    const socket = io(CLIENT_A_SERVICE, {
       withCredentials: true,
     });
 
@@ -21,7 +22,7 @@ export default function ClientA() {
 
   async function sendMessageToB() {
     try {
-      await axios.post("http://localhost:3000/message-to-b", {
+      await axios.post(`${CLIENT_A_SERVICE}/message-to-b`, {
         sender: "clientA",
         message,
       });
