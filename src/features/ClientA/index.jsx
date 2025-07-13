@@ -1,60 +1,36 @@
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import { io } from "socket.io-client";
-import { CLIENT_A_SERVICE } from "../../../app/constants";
+import { useClientAHook } from "./hook";
 
 export default function ClientA() {
-  const [message, setMessage] = useState("");
-  const [receivedMessages, setReceivedMessages] = useState([]);
-  const inputRef = useRef();
-
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    const socket = io(CLIENT_A_SERVICE, {
-      withCredentials: true,
-    });
-
-    socket.on("message-to-client-a", (data) => {
-      console.log("Real-time message from client B:", data);
-      setReceivedMessages((prev) => [...prev, data]);
-    });
-
-    return () => socket.disconnect();
-  }, []);
-
-  async function sendMessageToB() {
-    try {
-      await axios.post(`${CLIENT_A_SERVICE}/message-to-b`, {
-        sender: "clientA",
-        message,
-      });
-
-      setMessage("");
-      inputRef.current.focus();
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const [message, setMessage, receivedMessages, inputRef, sendMessageToB] =
+    useClientAHook();
 
   return (
-    <div>
-      <h1>Client-A</h1>
-      <input
-        ref={inputRef}
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <button onClick={sendMessageToB}>Send</button>
+    <div className="client-b-container">
+      <h1 className="heading">Client-A</h1>
 
-      <div>
+      <div className="input-group">
+        <input
+          ref={inputRef}
+          type="text"
+          className="message-input"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type your message..."
+        />
+        <button className="send-button" onClick={sendMessageToB}>
+          Send
+        </button>
+      </div>
+
+      <div className="messages-section">
         <h3>Messages from Client B:</h3>
-        {receivedMessages.map((msg, idx) => (
-          <div key={idx}>{msg.message}</div>
-        ))}
+        <div className="messages-list">
+          {receivedMessages.map((msg, idx) => (
+            <div className="message-bubble" key={idx}>
+              {msg.message}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
