@@ -37,21 +37,12 @@ export default function ClientB() {
       console.log(error);
     }
   }
-  // return (
-  //   <div>
-  //     <input
-  //       type="text"
-  //       value={message}
-  //       onChange={(e) => setMessage(e.target.value)}
-  //     />
-  //     <button onClick={() => sendMessageToA()}>Send</button>
-  //   </div>
-  // );
 
   return (
     <div>
       <h1>Client-B</h1>
       <input
+        ref={inputRef}
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
