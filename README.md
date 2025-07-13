@@ -10,7 +10,7 @@ This frontend application provides the user interface for a real-time, client-to
 
 The user interaction and data flow from the frontend are as follows:
 
-1.  **Client Selection:**Upon loading, the application presents a landing page where the user can choose to interact as either "Client A" or "Client B".
+1.  **Client Selection:** Upon loading, the application presents a landing page where the user can choose to interact as either "Client A" or "Client B".
 2.  **Message Sending:**
 
     - If the user is on the **Client A** interface, typing a message and clicking "Send" dispatches a `POST` request to the **Client A backend's** `/message-to-b` endpoint.
