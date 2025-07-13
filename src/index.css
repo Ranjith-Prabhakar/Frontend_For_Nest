@@ -78,3 +78,47 @@ body {
   max-width: 80%;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
+
+.landing-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #09203f, #537895);
+  color: #f0f0f0;
+  font-family: "Arial", sans-serif;
+}
+
+.landing-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.landing-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #3399ff;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  min-width: 220px;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.landing-button:hover {
+  background-color: #237dd2;
+  transform: scale(1.03);
+}
