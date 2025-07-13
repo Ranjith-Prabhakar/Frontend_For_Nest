@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { CLIENT_A_SERVICE } from "../../../app/constants";
@@ -6,7 +6,10 @@ import { CLIENT_A_SERVICE } from "../../../app/constants";
 export default function ClientA() {
   const [message, setMessage] = useState("");
   const [receivedMessages, setReceivedMessages] = useState([]);
-
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   useEffect(() => {
     const socket = io(CLIENT_A_SERVICE, {
       withCredentials: true,
@@ -28,6 +31,7 @@ export default function ClientA() {
       });
 
       setMessage("");
+      inputRef.current.focus();
     } catch (error) {
       console.log(error);
     }
@@ -37,6 +41,7 @@ export default function ClientA() {
     <div>
       <h1>Client-A</h1>
       <input
+        ref={inputRef}
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
