@@ -1,11 +1,16 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { CLIENT_B_SERVICE } from "../../../app/constants";
 
 export default function ClientB() {
   let [message, setMessage] = useState("");
   const [receivedMessages, setReceivedMessages] = useState([]);
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   useEffect(() => {
     const socket = io(CLIENT_B_SERVICE, {
@@ -27,6 +32,7 @@ export default function ClientB() {
         message,
       });
       setMessage("");
+      inputRef.current.focus();
     } catch (error) {
       console.log(error);
     }

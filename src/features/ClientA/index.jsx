@@ -7,9 +7,11 @@ export default function ClientA() {
   const [message, setMessage] = useState("");
   const [receivedMessages, setReceivedMessages] = useState([]);
   const inputRef = useRef();
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
+
   useEffect(() => {
     const socket = io(CLIENT_A_SERVICE, {
       withCredentials: true,
